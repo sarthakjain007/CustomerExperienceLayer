@@ -1,0 +1,39 @@
+type AddressDTO {
+    addressId: ID
+    address1: String
+    address2: String
+    city: String
+    state: String
+    postalCode: String
+}
+
+input CustomerInputDTO {
+	firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+}
+
+type CustomerDTO{
+	customerId: ID
+	firstName: String
+    lastName: String
+    email: String
+    phoneNumber: String
+    addresses: [AddressDTO]
+}
+
+schema {
+query : Query
+}
+
+
+type Query {
+    customerById(customerId: Int): CustomerDTO
+    customerDetails: [CustomerDTO]
+    firstNCustomers(limit: Int): [CustomerDTO]
+}
+
+type Mutation {
+   createCustomer(customerInputDTO: CustomerInputDTO!): CustomerDTO
+}
